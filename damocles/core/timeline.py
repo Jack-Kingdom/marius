@@ -1,7 +1,7 @@
+import heapq
 from threading import Thread
 from .item import Item
 from .wait import wait
-import heapq
 
 
 class TimeLine(Thread):
@@ -9,7 +9,7 @@ class TimeLine(Thread):
         super(TimeLine).__init__(name='damocles')
 
         self.time = 0
-        self.head = None
+        self.lst = []
 
     def push(self, item):
         """

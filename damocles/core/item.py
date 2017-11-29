@@ -19,4 +19,3 @@ class Item(object):
         self.kwargs = kwargs
 
         self.time = delay
-        self.next = None
