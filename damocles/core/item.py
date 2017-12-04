@@ -1,3 +1,6 @@
+import time
+
+
 class Item(object):
     def __init__(self, func, delay, repeat, *args, **kwargs):
         """
@@ -13,9 +16,13 @@ class Item(object):
         assert isinstance(repeat, int)
 
         self.func = func
-        self.delay = delay
+        self.time = time.time() + delay
         self.repeat = repeat
         self.args = args
         self.kwargs = kwargs
 
-        self.time = delay
+    def __eq__(self, other):
+        if not isinstance(other, Item):
+            raise TypeError('only Item object can be compare.')
+
+        return self.time == other.time
