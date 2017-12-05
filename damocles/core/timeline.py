@@ -1,19 +1,13 @@
 import time
-from threading import Thread, Condition, Lock
 from .item import Item
 from .wait import wait
 from .utils import SingletonDecorator
 
 
 @SingletonDecorator
-class TimeLine(Thread):
+class TimeLine(object):
     def __init__(self):
-        super(TimeLine).__init__(name='damocles')
-
-        self.time = 0
-        self.lst = []
-        self.lock = Lock()
-        self.cond = Condition(Lock())
+        self._lst = []
 
     def push(self, item):
         """
@@ -24,32 +18,66 @@ class TimeLine(Thread):
         if not isinstance(item, Item):
             raise TypeError('item must be a instance of Item class')
 
-        with self.lock:
-            self.lst.append(item)
+        self._lst.append(item)
 
-        with self.cond:
-            self.cond.notify()
+        # shift up new item
+        node = len(self._lst) - 1
+        parent = (node - 1) // 2
+        while True:
+            if node and self._lst[node] < self._lst[parent]:
+                self._lst[node], self._lst[parent] = self._lst[parent], self._lst[node]
+                node = parent
+                parent = (node - 1) // 2
+            else:
+                break
+
+    def pop(self):
+        """
+        pop first item
+        :return: Item object
+        """
+
+        tail = len(self._lst) - 1
+        if tail < 0:
+            raise ValueError('no job exist.')
+
+        self._lst[0], self._lst[tail] = self._lst[tail], self._lst[0]
+        tail -= 1  # skip last one
+
+        # shift down
+        node = 0
+        child = node * 2 + 1
+        while True:
+            if child + 1 <= tail and self._lst[child + 1] < self._lst[child]:
+                child += 1
+
+            if self._lst[child] < self._lst[node]:
+                self._lst[node], self._lst[child] = self._lst[child], self._lst[node]
+                node = child
+                child = node * 2 + 1
+            else:
+                break
+
+        return self._lst.pop()
+
+    def wait_next(self):
+
+        if not self._lst:
+            raise ValueError('no job exit')
+
+        idle_time = self._lst[0].time - time.time()
+        wait(idle_time if idle_time > 0 else 0)
 
     def run(self):
-        while True:
-            with self.lock:
-                jobs_num = len(self.lst)
 
-            if not jobs_num:
-                with self.cond:
-                    self.cond.wait()
+        item = self.pop()
+        func = item.func
 
-            # todo assume first is the most recent job
-            todo = self.lst[0]
-            interval = todo.time - time.time()
-            if interval > 0:
-                with self.cond:
-                    self.cond.wait(interval)
-            else:
-                todo.func(*todo.args, **todo.kwargs)
-                if todo.repeat:
-                    todo.repeat -= 1
-                    # pop & push
-                else:
-                    pass
-                    # pop item
+        try:
+            item.time = next(item.sequence)
+        except StopIteration as e:
+            item.time = None
+        else:
+            self.push(item)
+
+        return func()
