@@ -1,7 +1,3 @@
-import time
-import functools
-
-
 class Item(object):
     def __init__(self, func, sequence):
         """

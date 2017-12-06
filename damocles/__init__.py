@@ -1,1 +1,1 @@
-from damocles.core.wait import timeout
+from damocles.core import *
