@@ -21,13 +21,13 @@ class TimeLine(object):
         self._lst.append(item)
 
         # shift up new item
-        node = len(self._lst) - 1
-        parent = (node - 1) // 2
+        child = len(self._lst) - 1
+        parent = (child - 1) // 2
         while True:
-            if node and self._lst[node] < self._lst[parent]:
-                self._lst[node], self._lst[parent] = self._lst[parent], self._lst[node]
-                node = parent
-                parent = (node - 1) // 2
+            if child and self._lst[child] < self._lst[parent]:
+                self._lst[child], self._lst[parent] = self._lst[parent], self._lst[child]
+                child = parent
+                parent = (child - 1) // 2
             else:
                 break
 
@@ -63,7 +63,7 @@ class TimeLine(object):
     def wait_next(self):
 
         if not self._lst:
-            raise ValueError('no job exit')
+            raise RuntimeError('no job exist')
 
         idle_time = self._lst[0].time - time.time()
         wait(idle_time if idle_time > 0 else 0)
