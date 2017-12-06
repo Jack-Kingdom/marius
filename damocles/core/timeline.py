@@ -45,16 +45,16 @@ class TimeLine(object):
         tail -= 1  # skip last one
 
         # shift down
-        node = 0
-        child = node * 2 + 1
-        while True:
+        father = 0
+        child = father * 2 + 1
+        while child <= tail:
             if child + 1 <= tail and self._lst[child + 1] < self._lst[child]:
                 child += 1
 
-            if self._lst[child] < self._lst[node]:
-                self._lst[node], self._lst[child] = self._lst[child], self._lst[node]
-                node = child
-                child = node * 2 + 1
+            if self._lst[child] < self._lst[father]:
+                self._lst[father], self._lst[child] = self._lst[child], self._lst[father]
+                father = child
+                child = father * 2 + 1
             else:
                 break
 
