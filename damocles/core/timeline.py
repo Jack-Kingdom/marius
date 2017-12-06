@@ -2,6 +2,7 @@ import time
 from .item import Item
 from .wait import wait
 from .utils import SingletonDecorator
+from .exception import NoJobException
 
 
 @SingletonDecorator
@@ -63,7 +64,7 @@ class TimeLine(object):
     def wait_next(self):
 
         if not self._lst:
-            raise RuntimeError('no job exist')
+            raise NoJobException('no job exist')
 
         idle_time = self._lst[0].time - time.time()
         wait(idle_time if idle_time > 0 else 0)

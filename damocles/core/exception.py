@@ -1,0 +1,2 @@
+class NoJobException(Exception):
+    pass
