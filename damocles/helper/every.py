@@ -1,6 +1,8 @@
-def every(peroid):
+def every(period):
     """
 
-    :param peroid:
-    :return:
+    :param period: a sentence to describe time period
+    :return: a generator of unix timestamp
     """
+
+    pass
