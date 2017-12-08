@@ -5,7 +5,7 @@ setup(
     name='sisyphus',
     packages=['sisyphus'],
     version='0.1.0',
-    description='Another job scheduling tool.',
+    description='Another job scheduling tool with more performance and scalability.',
     license='MIT',
     author='Jack King',
     author_email='email@qiaohong.org',
