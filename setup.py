@@ -1,23 +1,14 @@
-"""
-Publish a new version:
 
-$ git tag X.Y.Z -m "Release X.Y.Z"
-$ git push --tags
-
-$ pip install --upgrade twine wheel
-$ python setup.py sdist bdist_wheel --universal
-$ twine upload dist/*
-"""
 from setuptools import setup
 
 setup(
-    name='damocles',
-    packages=['damocles'],
-    version='0.0.1',
-    description='Job scheduling for humans.',
+    name='sisyphus',
+    packages=['sisyphus'],
+    version='0.1.0',
+    description='Another job scheduling tool.',
     license='MIT',
-    author='Daniel Bader',
-    author_email='mail@dbader.org',
+    author='Jack King',
+    author_email='email@qiaohong.org',
     classifiers=[
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',

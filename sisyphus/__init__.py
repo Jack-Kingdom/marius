@@ -1,1 +1,1 @@
-from damocles.core import *
+from sisyphus.core import *
