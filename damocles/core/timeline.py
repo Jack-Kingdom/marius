@@ -1,5 +1,5 @@
 import time
-from .item import Item
+from .job import Job
 from .wait import wait
 from .utils import SingletonDecorator
 
@@ -9,16 +9,16 @@ class TimeLine(object):
     def __init__(self):
         self._lst = []
 
-    def push(self, item):
+    def add(self, job):
         """
-        push an item into time line
-        :param item: instance of Item class
+        push an job into time line
+        :param job: instance of Item class
         :return: None
         """
-        if not isinstance(item, Item):
-            raise TypeError('item must be a instance of Item class')
+        if not isinstance(job, Job):
+            raise TypeError('item must be a instance of Job class')
 
-        self._lst.append(item)
+        self._lst.append(job)
 
         # shift up new item
         child = len(self._lst) - 1
@@ -60,7 +60,7 @@ class TimeLine(object):
 
         return self._lst.pop()
 
-    def has_next(self):
+    def has_jobs(self):
         return bool(self._lst)
 
     def wait_next(self):
@@ -73,14 +73,14 @@ class TimeLine(object):
 
     def run(self):
 
-        item = self.pop()
-        func = item.func
+        job = self.pop()
+        func = job.func
 
         try:
-            item.time = next(item.sequence)
+            job.time = next(job.sequence)
         except StopIteration as e:
-            item.time = None
+            job.time = None
         else:
-            self.push(item)
+            self.add(job)
 
         return func()
