@@ -1,5 +1,5 @@
 import time
-from .job import Job
+from .task import Task
 from .wait import wait
 from .utils import SingletonDecorator
 
@@ -9,16 +9,16 @@ class TimeLine(object):
     def __init__(self):
         self._lst = []
 
-    def add(self, job):
+    def add(self, task):
         """
-        push an job into time line
-        :param job: instance of Item class
+        push an task into time line
+        :param task: instance of Item class
         :return: None
         """
-        if not isinstance(job, Job):
-            raise TypeError('item must be a instance of Job class')
+        if not isinstance(task, Task):
+            raise TypeError('item must be a instance of Task class')
 
-        self._lst.append(job)
+        self._lst.append(task)
 
         # shift up new item
         child = len(self._lst) - 1
@@ -39,7 +39,7 @@ class TimeLine(object):
 
         tail = len(self._lst) - 1
         if tail < 0:
-            raise ValueError('no job exist.')
+            raise ValueError('no task exist.')
 
         self._lst[0], self._lst[tail] = self._lst[tail], self._lst[0]
         tail -= 1  # skip last one
@@ -60,27 +60,27 @@ class TimeLine(object):
 
         return self._lst.pop()
 
-    def has_jobs(self):
+    def has_tasks(self):
         return bool(self._lst)
 
     def wait_next(self):
 
         if not self._lst:
-            raise RuntimeError('no job exist')
+            raise RuntimeError('no task exist')
 
         idle_time = self._lst[0].time - time.time()
         wait(idle_time if idle_time > 0 else 0)
 
     def run(self):
 
-        job = self.pop()
-        func = job.func
+        task = self.pop()
+        func = task.func
 
         try:
-            job.time = next(job.sequence)
+            task.time = next(task.sequence)
         except StopIteration as e:
-            job.time = None
+            task.time = None
         else:
-            self.add(job)
+            self.add(task)
 
         return func()

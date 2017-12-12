@@ -1,10 +1,10 @@
 from functools import partial
 
 
-class Job(object):
+class Task(object):
     def __init__(self, sequence, func, *args, **kwargs):
         """
-        wrap a function into a Job
+        wrap a function into a Task
         :param sequence:
             a generator of unix time
         :param func:
@@ -20,7 +20,7 @@ class Job(object):
         self.func = partial(func, *args, **kwargs)
 
     def __lt__(self, other):
-        if not isinstance(other, Job):
-            raise TypeError('only Job object can be compare.')
+        if not isinstance(other, Task):
+            raise TypeError('only Task object can be compare.')
 
         return self.time < other.time

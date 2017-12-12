@@ -1,5 +1,5 @@
 import time
-from sisyphus.core import Job, TimeLine
+from sisyphus.core import Task, TimeLine
 
 now = time.time()
 before = [now for _ in range(10)]
@@ -12,8 +12,8 @@ def func1(num):
 
 if __name__ == '__main__':
     tl = TimeLine()
-    tl.add(Job(iter([now + i for i in [2, 3, 5]]), func1, 3))
-    while tl.has_jobs():
+    tl.add(Task(iter([now + i for i in [2, 3, 5]]), func1, 3))
+    while tl.has_tasks():
         tl.wait_next()
         tl.run()
     else:

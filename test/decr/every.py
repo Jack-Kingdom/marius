@@ -1,5 +1,5 @@
 import time
-from sisyphus.core import Job, TimeLine
+from sisyphus.core import Task, TimeLine
 from sisyphus.helper import every
 
 now = time.time()
@@ -13,11 +13,11 @@ def func1(num):
 
 if __name__ == '__main__':
     tl = TimeLine()
-    tl.add(Job(every(2), func1, 2))
-    tl.add(Job(every(3), func1, 3))
-    tl.add(Job(every(4), func1, 4))
+    tl.add(Task(every(2), func1, 2))
+    tl.add(Task(every(3), func1, 3))
+    tl.add(Task(every(4), func1, 4))
 
-    while tl.has_jobs():
+    while tl.has_tasks():
         tl.wait_next()
         tl.run()
     else:

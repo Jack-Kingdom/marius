@@ -1,2 +1,2 @@
-from .job import Job
+from .task import Task
 from .timeline import TimeLine
