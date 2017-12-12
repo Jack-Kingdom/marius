@@ -1,9 +1,8 @@
-
 from setuptools import setup
 
 setup(
     name='sisyphus',
-    packages=['sisyphus'],
+    packages=['sisyphus.core', 'sisyphus.helper'],
     version='0.1.0',
     description='Another job scheduling tool with more performance and scalability.',
     license='MIT',

@@ -21,6 +21,6 @@ class Job(object):
 
     def __lt__(self, other):
         if not isinstance(other, Job):
-            raise TypeError('only Item object can be compare.')
+            raise TypeError('only Job object can be compare.')
 
         return self.time < other.time
