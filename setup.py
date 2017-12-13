@@ -2,13 +2,16 @@ from setuptools import setup
 
 setup(
     name='marius',
-    packages=['marius.core', 'marius.helper'],
-    version='0.1.0',
-    description='Light weight job scheduling tool with more performance and scalability.',
+    packages=['marius', 'marius.helper'],
+    version='0.1.1',
     url='https://github.com/Jack-Kingdom/marius.git',
+    description='Light weight job scheduling tool with more performance and scalability.',
+    long_description=open('README.md').read(),
+
     author='Jack King',
     author_email='email@qiaohong.org',
     license='MIT',
+
     classifiers=[
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',

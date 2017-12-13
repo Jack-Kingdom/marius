@@ -1,7 +1,5 @@
 import time
-from marius.core import Task, TimeLine
-
-now = time.time()
+from marius import Task, TimeLine
 
 
 def func(num):
@@ -10,6 +8,7 @@ def func(num):
 
 if __name__ == '__main__':
     tl = TimeLine()
+    now = time.time()
     tl.add(Task(iter([now + i for i in [2, 3, 5]]), func, 3))
     while tl.has_tasks():
         tl.wait_next()
