@@ -1,8 +1,7 @@
 ## Marius
 --------
-
-Light weight job scheduling tool with more performance and scalability.
-
+Light weight job scheduling tool with more performance and scalability.<br/>
+Name come from [Gaius Marius](https://en.wikipedia.org/wiki/Gaius_Marius)
 
 ### Installation
 
@@ -39,5 +38,5 @@ if __name__ == '__main__':
 3. add doc
 
 ### Welcome to contribute
-Feel free to open a issue or start a pull request. 
+Feel free to open a issue or start a pull request. <br/>
 You are welcome.
