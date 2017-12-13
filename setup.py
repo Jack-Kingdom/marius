@@ -2,8 +2,8 @@ from setuptools import setup
 
 setup(
     name='marius',
-    packages=['marius', 'marius.helper'],
-    version='0.1.1',
+    packages=['marius', 'marius.core', 'marius.helper'],
+    version='0.1.2',
     url='https://github.com/Jack-Kingdom/marius.git',
     description='Light weight job scheduling tool with more performance and scalability.',
     long_description=open('README.md').read(),
