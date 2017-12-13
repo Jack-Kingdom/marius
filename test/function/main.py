@@ -2,12 +2,10 @@ import time
 from marius.core import Task, TimeLine
 
 now = time.time()
-before = [now for _ in range(10)]
 
 
 def func(num):
-    print('task-', num, time.time() - before[num])
-    before[num] = time.time()
+    print('task-{0}'.format(num))
 
 
 if __name__ == '__main__':
