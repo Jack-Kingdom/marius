@@ -9,3 +9,6 @@ dist
 
 # virtualenv
 venv
+
+# config file
+.pypirc

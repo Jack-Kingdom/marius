@@ -1,6 +1,6 @@
 import time
-from sisyphus.core import Task, TimeLine
-from sisyphus.helper import every
+from marius.core import Task, TimeLine
+from marius.helper import every
 
 now = time.time()
 before = [now for _ in range(10)]

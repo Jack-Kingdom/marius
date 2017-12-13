@@ -1,13 +1,14 @@
 from setuptools import setup
 
 setup(
-    name='sisyphus',
-    packages=['sisyphus.core', 'sisyphus.helper'],
+    name='marius',
+    packages=['marius.core', 'marius.helper'],
     version='0.1.0',
-    description='Another job scheduling tool with more performance and scalability.',
-    license='MIT',
+    description='Light weight job scheduling tool with more performance and scalability.',
+    url='https://github.com/Jack-Kingdom/marius.git',
     author='Jack King',
     author_email='email@qiaohong.org',
+    license='MIT',
     classifiers=[
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
