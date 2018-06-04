@@ -84,3 +84,13 @@ class TimeLine(object):
             self.add(task)
 
         return func()
+
+    def start(self):
+        """
+        start time line
+        :return: None
+        """
+
+        while self.has_tasks():
+            self.wait_next()
+            self.run()

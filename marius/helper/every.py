@@ -1,5 +1,6 @@
 import time
 import itertools
+from marius import TimeLine, Task
 
 
 def every(interval):
@@ -13,4 +14,9 @@ def every(interval):
     if not isinstance(interval, (int, float)):
         raise ValueError('interval must be a number')
 
-    return (time.time() + interval for _ in itertools.count(1))
+    sequence = (time.time() + interval for _ in itertools.count(1))
+
+    def wrapper(func):
+        TimeLine().add(Task(sequence, func))
+
+    return wrapper
