@@ -33,8 +33,8 @@ if __name__ == '__main__':
 ```
 
 ### TODO
-1. add automatic test support
-2. add more helper function
+1. ~~add automatic test support~~
+2. ~~add more helper function~~
 3. add doc
 
 ### Welcome to contribute
