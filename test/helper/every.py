@@ -1,24 +1,26 @@
 import time
+import unittest
 from marius.core import Task, TimeLine
 from marius.helper import every
 
-now = time.time()
-before = [now for _ in range(10)]
+interval = 2
 
 
-def func1(num):
-    print(num, time.time() - before[num])
-    before[num] = time.time()
+@every(interval)
+def func():
+    return time.time()
 
 
-if __name__ == '__main__':
-    tl = TimeLine()
-    tl.add(Task(every(2), func1, 2))
-    tl.add(Task(every(3), func1, 3))
-    tl.add(Task(every(4), func1, 4))
+class EveryUnitTest(unittest.TestCase):
 
-    while tl.has_tasks():
-        tl.wait_next()
-        tl.run()
-    else:
-        print("all job run over")
+    def test_interval(self):
+        tl = TimeLine()
+
+        last = None
+        for _ in range(5):
+            tl.wait_next()
+            cur = tl.run()
+
+            if last:
+                self.assertEqual(interval, round(cur - last))
+            last = cur
